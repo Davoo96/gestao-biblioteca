@@ -31,7 +31,6 @@ class Book(models.Model):
     title = models.CharField(max_length=300)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    isbn = models.CharField(max_length=13, unique=True, blank=True)
     pages = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     publication_date = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='available')

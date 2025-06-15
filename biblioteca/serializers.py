@@ -18,7 +18,7 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ['id', 'title', 'author', 'author_name', 'category', 
-                 'category_name', 'isbn', 'pages', 'publication_date', 
+                 'category_name', 'pages', 'publication_date', 
                  'status', 'created_at']
 
 class LoanSerializer(serializers.ModelSerializer):
