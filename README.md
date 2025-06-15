@@ -118,12 +118,12 @@ sistema-biblioteca-pessoal/
 │ │ └── responsive.css
 │ │
 │ ├── js/
-│ │ ├── main.js
-│ │ ├── api.js
-│ │ └── dashboard.js
-│ │
-│ └── assets/
-│ └── images/
+│ ├── main.js
+│ ├── api.js
+│ └── dashboard.js
+│
+│
+│
 │
 ├── requirements.txt
 ├── README.md
@@ -187,7 +187,7 @@ sistema-biblioteca-pessoal/
 
 ### Variáveis de Ambiente
 
-Crie um arquivo `.env` para dados sensíveis:
+Crie um arquivo `.env` a partir do `.env.example` para dados sensíveis e preencha os campos que estão sem valor:
 
 ```env
 SECRET_KEY=sua-chave-secreta
