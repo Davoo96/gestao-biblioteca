@@ -85,11 +85,19 @@ python manage.py createsuperuser
 
 ### 6. Executar Servidor de Desenvolvimento
 
+backend:
+
 ```bash
 python manage.py runserver
 ```
 
-A aplicação estará disponível em `http://localhost:8000`
+frontend:
+
+```bash
+python -m http.server 3000
+```
+
+A aplicação estará disponível em `http://localhost:8000` para o backend e `http://localhost:3000/` para o front
 
 ## 📁 Estrutura do Projeto
 
