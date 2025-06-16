@@ -1,5 +1,5 @@
 export const API = {
-  baseURL: "http://localhost:8000/api",
+  baseURL: "http://0.0.0.0:8000/api",
   getDashboard: async () => {
     return await API.fetch("/dashboard");
   },
