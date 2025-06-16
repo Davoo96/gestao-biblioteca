@@ -112,35 +112,6 @@ python manage.py runserver
 
 A aplicação estará disponível em `http://localhost:8000`
 
-### Livros
-
-- `GET /api/books/` - Listar todos os livros
-- `POST /api/books/` - Criar novo livro
-- `GET /api/books/{id}/` - Obter livro específico
-- `DELETE /api/books/{id}/` - Excluir livro
-
-### Autores
-
-- `GET /api/authors/` - Listar todos os autores
-- `POST /api/authors/` - Criar novo autor
-- `GET /api/authors/{id}/` - Obter autor específico
-- `DELETE /api/authors/{id}/` - Excluir autor
-
-### Categorias
-
-- `GET /api/categories/` - Listar todas as categorias
-- `POST /api/categories/` - Criar nova categoria
-- `GET /api/categories/{id}/` - Obter categoria específica
-- `DELETE /api/categories/{id}/` - Excluir categoria
-
-### Empréstimos
-
-- `GET /api/loans/` - Listar todos os empréstimos
-- `POST /api/loans/` - Criar novo empréstimo
-- `PUT /api/loans/{id}/return_book/` - Devolver livro
-
-## 💻 Como Usar
-
 ### Adicionando Livros
 
 1. Navegue até a seção "Adicionar Livro"
