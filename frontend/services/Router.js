@@ -275,6 +275,7 @@ async function deleteCategory(id) {
 async function loadLoans() {
   try {
     loans = await API.getLoans();
+    books = await API.getBooks();
 
     const tbody = document.getElementById("loans-table");
     if (loans.length === 0) {
@@ -320,11 +321,9 @@ async function loadLoans() {
 }
 
 async function returnBook(id) {
-  const returnDate = prompt(
-    "Data de devolução (YYYY-MM-DD):",
-    new Date().toISOString().split("T")[0]
-  );
-  if (returnDate) {
+  const returnDate = new Date().toISOString().split("T")[0];
+  app.showModal(`Confirmar devolução para a data: ${returnDate}`);
+  app.confirmDelete(async () => {
     try {
       await API.returnBook(id, returnDate);
       API.showMessage("Livro devolvido com sucesso!");
@@ -333,7 +332,7 @@ async function returnBook(id) {
     } catch (error) {
       API.showMessage("Erro ao devolver livro", "error");
     }
-  }
+  });
 }
 
 function formatDate(dateString) {

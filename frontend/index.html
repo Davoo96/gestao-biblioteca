@@ -69,38 +69,53 @@
             <h3>Adicionar Novo Livro</h3>
             <form id="book-form">
               <div class="form-group">
-                <label>Título *</label>
-                <input type="text" class="form-control" name="title" required />
+                <label
+                  >Título *
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="title"
+                    required
+                  />
+                </label>
               </div>
               <div class="form-group">
-                <label>Autor *</label>
-                <select class="form-control" name="author" required>
-                  <option value="">Selecione um autor</option>
-                </select>
+                <label
+                  >Autor *
+                  <select class="form-control" name="author" required>
+                    <option value="">Selecione um autor</option>
+                  </select>
+                </label>
               </div>
               <div class="form-group">
-                <label>Categoria *</label>
-                <select class="form-control" name="category" required>
-                  <option value="">Selecione uma categoria</option>
-                </select>
+                <label
+                  >Categoria *
+                  <select class="form-control" name="category" required>
+                    <option value="">Selecione uma categoria</option>
+                  </select>
+                </label>
               </div>
               <div class="form-group">
-                <label>Páginas *</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="pages"
-                  required
-                />
+                <label
+                  >Páginas *
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="pages"
+                    required
+                  />
+                </label>
               </div>
               <div class="form-group">
-                <label>Data de Publicação *</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  name="publication_date"
-                  required
-                />
+                <label
+                  >Data de Publicação *
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="publication_date"
+                    required
+                  />
+                </label>
               </div>
               <button type="submit" class="btn">
                 <i class="fas fa-plus"></i> Adicionar Livro
@@ -111,35 +126,38 @@
 
         <div class="filters">
           <div class="filter-group">
-            <label>Buscar</label>
-            <input
-              type="text"
-              class="form-control"
-              id="book-search"
-              placeholder="Buscar por título ou autor"
-            />
+            <label
+              >Buscar
+              <input
+                type="text"
+                class="form-control"
+                id="book-search"
+                placeholder="Buscar por título ou autor"
+              />
+            </label>
           </div>
           <div class="filter-group">
-            <label>Categoria</label>
-            <select class="form-control" id="book-category-filter">
-              <option value="">Todas as categorias</option>
-            </select>
+            <label
+              >Categoria
+              <select class="form-control" id="book-category-filter">
+                <option value="">Todas as categorias</option>
+              </select>
+            </label>
           </div>
           <div class="filter-group">
-            <label>Status</label>
-            <select class="form-control" id="book-status-filter">
-              <option value="">Todos os status</option>
-              <option value="available">Disponível</option>
-              <option value="loaned">Emprestado</option>
-              <option value="maintenance">Manutenção</option>
-            </select>
+            <label
+              >Status
+              <select class="form-control" id="book-status-filter">
+                <option value="">Todos os status</option>
+                <option value="available">Disponível</option>
+                <option value="loaned">Emprestado</option>
+                <option value="maintenance">Manutenção</option>
+              </select>
+            </label>
           </div>
-          <div class="filter-group">
-            <label>&nbsp;</label>
-            <button class="btn" data-action="filter-books">
-              <i class="fas fa-search"></i> Filtrar
-            </button>
-          </div>
+          <button class="btn" data-action="filter-books">
+            <i class="fas fa-search"></i> Filtrar
+          </button>
         </div>
 
         <div class="table-container">
@@ -171,20 +189,31 @@
             <h3>Adicionar Novo Autor</h3>
             <form id="author-form">
               <div class="form-group">
-                <label>Nome *</label>
-                <input type="text" class="form-control" name="name" required />
+                <label
+                  >Nome *
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    required
+                  />
+                </label>
               </div>
               <div class="form-group">
-                <label>Nacionalidade</label>
-                <input type="text" class="form-control" name="nationality" />
+                <label
+                  >Nacionalidade
+                  <input type="text" class="form-control" name="nationality" />
+                </label>
               </div>
               <div class="form-group">
-                <label>Biografia</label>
-                <textarea
-                  class="form-control"
-                  name="biography"
-                  rows="3"
-                ></textarea>
+                <label
+                  >Biografia
+                  <textarea
+                    class="form-control"
+                    name="biography"
+                    rows="3"
+                  ></textarea>
+                </label>
               </div>
               <button type="submit" class="btn">
                 <i class="fas fa-plus"></i> Adicionar Autor
@@ -219,16 +248,25 @@
             <h3>Adicionar Nova Categoria</h3>
             <form id="category-form">
               <div class="form-group">
-                <label>Nome *</label>
-                <input type="text" class="form-control" name="name" required />
+                <label
+                  >Nome *
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    required
+                  />
+                </label>
               </div>
               <div class="form-group">
-                <label>Descrição</label>
-                <textarea
-                  class="form-control"
-                  name="description"
-                  rows="3"
-                ></textarea>
+                <label
+                  >Descrição
+                  <textarea
+                    class="form-control"
+                    name="description"
+                    rows="3"
+                  ></textarea>
+                </label>
               </div>
               <button type="submit" class="btn">
                 <i class="fas fa-plus"></i> Adicionar Categoria
@@ -263,28 +301,34 @@
             <h3>Novo Empréstimo</h3>
             <form id="loan-form">
               <div class="form-group">
-                <label>Livro *</label>
-                <select class="form-control" name="book" required>
-                  <option value="">Selecione um livro disponível</option>
-                </select>
+                <label
+                  >Livro *
+                  <select class="form-control" name="book" required>
+                    <option value="">Selecione um livro disponível</option>
+                  </select>
+                </label>
               </div>
               <div class="form-group">
-                <label>Nome do Usuário *</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="borrower_name"
-                  required
-                />
+                <label
+                  >Nome do Usuário *
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="borrower_name"
+                    required
+                  />
+                </label>
               </div>
               <div class="form-group">
-                <label>Data de Devolução Esperada *</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  name="expected_return_date"
-                  required
-                />
+                <label
+                  >Data de Devolução Esperada *
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="expected_return_date"
+                    required
+                  />
+                </label>
               </div>
               <button type="submit" class="btn">
                 <i class="fas fa-plus"></i> Criar Empréstimo
