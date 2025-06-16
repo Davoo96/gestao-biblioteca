@@ -435,6 +435,7 @@ const Router = {
           API.showMessage("Livro adicionado com sucesso!");
           this.reset();
           loadBooks();
+          loadSelectOptions();
         } catch (error) {
           API.showMessage("Erro ao adicionar livro", "error");
         }
