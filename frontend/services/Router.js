@@ -206,6 +206,11 @@ async function loadBooks() {
                 </td>
                 <td>${book.pages}</td>
                 <td>
+                    <button class="btn-edit" data-type="book" data-id="${
+                      book.id
+                    }">
+                        <i class="fas fa-edit"></i>
+                    </button>
                     <button class="btn-delete" data-type="book" data-id="${
                       book.id
                     }">
@@ -236,10 +241,10 @@ async function deleteBook(id) {
   app.confirmDelete(async () => {
     try {
       await API.deleteBook(id);
-      API.showMessage("Livro excluído com sucesso!");
+      app.showMessage("Livro excluído com sucesso!");
       loadBooks();
     } catch (error) {
-      API.showMessage("Erro ao excluir livro", "error");
+      app.showMessage("Erro ao excluir livro", "error");
     }
   });
 }
@@ -249,11 +254,11 @@ async function deleteAuthor(id) {
   app.confirmDelete(async () => {
     try {
       await API.deleteAuthor(id);
-      API.showMessage("Autor excluído com sucesso!");
+      app.showMessage("Autor excluído com sucesso!");
       loadAuthors();
       loadSelectOptions();
     } catch (error) {
-      API.showMessage("Erro ao excluir autor", "error");
+      app.showMessage("Erro ao excluir autor", "error");
     }
   });
 }
@@ -263,13 +268,40 @@ async function deleteCategory(id) {
   app.confirmDelete(async () => {
     try {
       await API.deleteCategory(id);
-      API.showMessage("Categoria excluída com sucesso!");
+      app.showMessage("Categoria excluída com sucesso!");
       loadCategories();
       loadSelectOptions();
     } catch (error) {
-      API.showMessage("Erro ao excluir categoria", "error");
+      app.showMessage("Erro ao excluir categoria", "error");
     }
   });
+}
+
+async function editBook(id) {
+  try {
+    const book = await API.getBook(id);
+
+    const form = document.getElementById("book-form");
+    form.elements["title"].value = book.title;
+    form.elements["author"].value = book.author;
+    form.elements["category"].value = book.category;
+    form.elements["pages"].value = book.pages || "";
+    form.elements["publication_date"].value = book.publication_date;
+
+    form.dataset.editMode = "true";
+    form.dataset.editId = id;
+
+    Router.navigate("books");
+    document.getElementById("book-form").scrollIntoView({ behavior: "smooth" });
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.textContent = "Atualizar Livro";
+    }
+  } catch (error) {
+    console.error(error);
+    app.showMessage("Erro ao carregar livro para edição", "error");
+  }
 }
 
 async function loadLoans() {
@@ -326,11 +358,11 @@ async function returnBook(id) {
   app.confirmDelete(async () => {
     try {
       await API.returnBook(id, returnDate);
-      API.showMessage("Livro devolvido com sucesso!");
+      app.showMessage("Livro devolvido com sucesso!");
       loadLoans();
       loadBooks();
     } catch (error) {
-      API.showMessage("Erro ao devolver livro", "error");
+      app.showMessage("Erro ao devolver livro", "error");
     }
   });
 }
@@ -344,6 +376,16 @@ const Router = {
 
   init: () => {
     document.addEventListener("click", async (e) => {
+      if (e.target.closest(".btn-edit")) {
+        const button = e.target.closest(".btn-edit");
+        const type = button.dataset.type;
+        const id = button.dataset.id;
+
+        if (type === "book" && id) {
+          await editBook(id);
+        }
+      }
+
       if (e.target.closest(".btn-delete")) {
         const button = e.target.closest(".btn-delete");
         const type = button.dataset.type;
@@ -431,13 +473,26 @@ const Router = {
         const data = Object.fromEntries(formData.entries());
 
         try {
-          await API.createBook(data);
-          API.showMessage("Livro adicionado com sucesso!");
+          if (this.dataset.editMode === "true" && this.dataset.editId) {
+            await API.updateBook(this.dataset.editId, data);
+            app.showMessage("Livro atualizado com sucesso!");
+
+            delete this.dataset.editMode;
+            delete this.dataset.editId;
+            const submitButton = this.querySelector('button[type="submit"]');
+            if (submitButton) {
+              submitButton.textContent = "Adicionar Livro";
+            }
+          } else {
+            await API.createBook(data);
+            app.showMessage("Livro adicionado com sucesso!");
+          }
+
           this.reset();
           loadBooks();
           loadSelectOptions();
         } catch (error) {
-          API.showMessage("Erro ao adicionar livro", "error");
+          app.showMessage("Erro ao processar livro", "error");
         }
       });
     }
@@ -451,12 +506,12 @@ const Router = {
 
         try {
           await API.createAuthor(data);
-          API.showMessage("Autor adicionado com sucesso!");
+          app.showMessage("Autor adicionado com sucesso!");
           this.reset();
           loadAuthors();
           loadSelectOptions();
         } catch (error) {
-          API.showMessage("Erro ao adicionar autor", "error");
+          app.showMessage("Erro ao adicionar autor", "error");
         }
       });
     }
@@ -470,13 +525,13 @@ const Router = {
 
         try {
           await API.createCategory(data);
-          API.showMessage("Categoria adicionada com sucesso!");
+          app.showMessage("Categoria adicionada com sucesso!");
           this.reset();
           loadCategories();
           loadSelectOptions();
         } catch (error) {
           console.error(error);
-          API.showMessage("Erro ao adicionar categoria", "error");
+          app.showMessage("Erro ao adicionar categoria", "error");
         }
       });
     }
@@ -490,13 +545,13 @@ const Router = {
 
         try {
           await API.createLoan(data);
-          API.showMessage("Empréstimo criado com sucesso!");
+          app.showMessage("Empréstimo criado com sucesso!");
           this.reset();
           loadLoans();
           loadBooks();
           loadSelectOptions();
         } catch (error) {
-          API.showMessage("Erro ao criar empréstimo", "error");
+          app.showMessage("Erro ao criar empréstimo", "error");
         }
       });
     }

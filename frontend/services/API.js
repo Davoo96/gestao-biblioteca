@@ -3,6 +3,9 @@ export const API = {
   getDashboard: async () => {
     return await API.fetch("/dashboard");
   },
+  getBook: async (id) => {
+    return API.fetch(`/books/${id}`);
+  },
   getBooks: async (params = {}) => {
     const query = new URLSearchParams(params).toString();
     return API.fetch(`/books/${query ? "?" + query : ""}`);
@@ -66,22 +69,6 @@ export const API = {
       method: "POST",
       body: JSON.stringify({ return_date: returnDate }),
     });
-  },
-  showMessage: (message, type = "success") => {
-    const messagesDiv = document.getElementById("messages");
-    const messageDiv = document.createElement("div");
-    messageDiv.className = `message ${type}`;
-    messageDiv.innerHTML = `
-            <span>${message}</span>
-            <button class="btn-message" onclick="this.parentElement.remove()">&times;</button>
-        `;
-    messagesDiv.appendChild(messageDiv);
-
-    setTimeout(() => {
-      if (messageDiv.parentElement) {
-        messageDiv.remove();
-      }
-    }, 5000);
   },
   fetch: async (serviceName, options = {}) => {
     try {
