@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="section">
+  <h2><i class="fas fa-trash"></i> Excluir Livro</h2>
+  <p>
+    Tem certeza que deseja excluir o livro <strong>{{ book.title }}</strong>?
+  </p>
+
+  <form method="post" action="{% url 'book_delete' book.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Excluir</button>
+    <a href="{% url 'book-list' %}" class="btn cancel-btn">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

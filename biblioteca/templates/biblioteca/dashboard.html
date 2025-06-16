@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% block title %} Dashboard - Sistema de Gestão de
+Biblioteca {% endblock %} {% block content %}
+<div id="dashboard" class="section active">
+  <h2><i class="fas fa-chart-dashboard"></i> Dashboard</h2>
+  <div class="dashboard-grid" id="dashboard-stats">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-book"></i></div>
+      <div class="stat-info">
+        <h3>{{ stats.total_books }}</h3>
+        <p>Total de Livros</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+      <div class="stat-info">
+        <h3>{{ stats.available_books }}</h3>
+        <p>Livros Disponíveis</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+      <div class="stat-info">
+        <h3>{{ stats.loaned_books }}</h3>
+        <p>Livros Emprestados</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-user"></i></div>
+      <div class="stat-info">
+        <h3>{{ stats.total_authors }}</h3>
+        <p>Autores</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-tags"></i></div>
+      <div class="stat-info">
+        <h3>{{ stats.total_categories }}</h3>
+        <p>Categorias</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-clock"></i></div>
+      <div class="stat-info">
+        <h3>{{ stats.active_loans }}</h3>
+        <p>Empréstimos Ativos</p>
+      </div>
+    </div>
+  </div>
+
+  {% if recent_loans %}
+  <div class="recent-activity">
+    <h3><i class="fas fa-clock"></i> Empréstimos Recentes</h3>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Livro</th>
+            <th>Usuário</th>
+            <th>Data do Empréstimo</th>
+            <th>Devolução Prevista</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for loan in recent_loans %}
+          <tr>
+            <td>{{ loan.book.title }}</td>
+            <td>{{ loan.borrower_name }}</td>
+            <td>{{ loan.loan_date|date:"d/m/Y" }}</td>
+            <td>{{ loan.expected_return_date|date:"d/m/Y" }}</td>
+            <td>
+              <span
+                class="status {% if loan.is_overdue %}overdue {% elif loan.returned %}returned {% else %}active {% endif %}"
+              >
+                {% if loan.returned %} Devolvido {% elif loan.is_overdue %} Em
+                atraso {% else %} Ativo {% endif %}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endif %} {% endblock %}

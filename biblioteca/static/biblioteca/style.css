@@ -112,6 +112,7 @@ body {
 .nav-btn {
   background: #667eea;
   color: white;
+  text-decoration: none;
   border: none;
   padding: 12px 20px;
   border-radius: 25px;
@@ -130,6 +131,10 @@ body {
 
 .nav-btn.active {
   background: #764ba2;
+}
+
+.details p {
+  padding-bottom: 16px;
 }
 
 .section {

@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% block title %} Gerenciar Categorias {% endblock %}
+{% block content %}
+<div id="category" class="section active">
+  <h2><i class="fas fa-tags"></i> Gerenciar Categorias</h2>
+
+  <div class="form-grid">
+    <div>
+      <h3>Adicionar Nova Categoria</h3>
+      <form method="post" action="{% url 'category_create' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>
+            Nome *
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              required
+              value="{{ form.name.value|default_if_none:'' }}"
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            Descrição
+            <textarea class="form-control" name="description" rows="3">
+{{ form.description.value|default_if_none:'' }}</textarea
+            >
+          </label>
+        </div>
+        <button type="submit" class="btn">
+          <i class="fas fa-plus"></i> Adicionar Categoria
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="table-container" style="margin-top: 2rem">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for category in categories %}
+        <tr>
+          <td>{{ category.name }}</td>
+          <td>{{ category.description|linebreaksbr }}</td>
+          <td>
+            <a
+              href="{% url 'category_update' category.pk %}"
+              class="btn btn-sm"
+            >
+              <i class="fas fa-edit"></i>
+            </a>
+            <button
+              class="btn btn-danger"
+              data-delete-url="{% url 'category_delete' category.id %}"
+              onclick="app.showDeleteModal(this, 'Tem certeza que deseja excluir a categoria {{category.name}}?')"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3">Nenhuma categoria encontrada.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<dialog id="alert-modal">
+  <div class="modal-content">
+    <p></p>
+    <form method="post" id="delete-form">
+      {% csrf_token %}
+      <div class="modal-buttons">
+        <button
+          type="button"
+          class="action-btn cancel-btn"
+          onclick="app.closeModal()"
+        >
+          Cancelar
+        </button>
+        <button type="submit" class="action-btn confirm-btn">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+{% endblock %}

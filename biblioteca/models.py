@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 from django.core.validators import MinValueValidator
 
 class Author(models.Model):
@@ -49,3 +50,6 @@ class Loan(models.Model):
     
     def __str__(self):
         return f"{self.book.title} - {self.borrower_name}"
+    
+    def is_overdue(self):
+        return not self.returned and date.today() > self.expected_return_date

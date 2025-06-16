@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Gestão de Biblioteca</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'biblioteca/style.css' %}" />
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <h1><i class="fas fa-book"></i> Sistema de Gestão de Biblioteca</h1>
+        <p>Gerencie seus livros, autores e empréstimos de forma eficiente</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="nav">
+        <div class="nav-buttons">
+          <a
+            href="{% url 'dashboard' %}"
+            class="nav-btn {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+          >
+            <i class="fas fa-chart-dashboard"></i> Dashboard
+          </a>
+          <a
+            href="{% url 'books' %}"
+            class="nav-btn {% if request.resolver_match.url_name == 'books' %}active{% endif %}"
+          >
+            <i class="fas fa-book"></i> Livros
+          </a>
+          <a
+            href="{% url 'authors' %}"
+            class="nav-btn {% if request.resolver_match.url_name == 'authors' %}active{% endif %}"
+          >
+            <i class="fas fa-user"></i> Autores
+          </a>
+          <a
+            href="{% url 'categories' %}"
+            class="nav-btn {% if request.resolver_match.url_name == 'categories' %}active{% endif %}"
+          >
+            <i class="fas fa-tags"></i> Categorias
+          </a>
+          <a
+            href="{% url 'loans' %}"
+            class="nav-btn {% if request.resolver_match.url_name == 'loans' %}active{% endif %}"
+          >
+            <i class="fas fa-handshake"></i> Empréstimos
+          </a>
+        </div>
+      </div>
+
+      {% if messages %}
+      <div id="messages">
+        {% for message in messages %}
+        <div class="message {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% block content %}{% endblock %}
+    </div>
+
+    {% block extra_js %}{% endblock %}
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

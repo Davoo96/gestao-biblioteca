@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="books" class="section active">
+  <h2><i class="fas fa-book"></i> Gerenciar Livros</h2>
+
+  <div class="form-grid">
+    <div>
+      <h3>Adicionar Novo Livro</h3>
+      <form method="post" action="{% url 'book_create' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Título *
+            <input type="text" class="form-control" name="title" required>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Autor *
+            <select class="form-control" name="author" required>
+              <option value="">Selecione um autor</option>
+              {% for author in authors %}
+              <option value="{{ author.id }}">{{ author.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Categoria *
+            <select class="form-control" name="category" required>
+              <option value="">Selecione uma categoria</option>
+              {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Páginas *
+            <input type="number" class="form-control" name="pages" required>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Data de Publicação *
+            <input type="date" class="form-control" name="publication_date" required>
+          </label>
+        </div>
+        <button type="submit" class="btn">
+          <i class="fas fa-plus"></i> Adicionar Livro
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="filters">
+    <form method="get">
+      <div class="filter-group">
+        <label>Buscar
+          <input type="text" class="form-control" name="search" value="{{ request.GET.search }}">
+        </label>
+      </div>
+      <div class="filter-group">
+        <label>Categoria
+          <select class="form-control" name="category">
+            <option value="">Todas as categorias</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
+              {{ category.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+      <div class="filter-group">
+        <label>Status
+          <select class="form-control" name="status">
+            <option value="">Todos os status</option>
+            <option value="available" {% if request.GET.status == "available" %}selected{% endif %}>Disponível</option>
+            <option value="loaned" {% if request.GET.status == "loaned" %}selected{% endif %}>Emprestado</option>
+            <option value="maintenance" {% if request.GET.status == "maintenance" %}selected{% endif %}>Manutenção</option>
+          </select>
+        </label>
+      </div>
+      <button class="btn" type="submit"><i class="fas fa-search"></i> Filtrar</button>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Categoria</th>
+          <th>Status</th>
+          <th>Páginas</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+        <tr>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author.name }}</td>
+          <td>{{ book.category.name }}</td>
+          <td><span class="status {{ book.status }}">{{ book.get_status_display }}</span></td>
+          <td>{{ book.pages }}</td>
+          <td>
+            <a href="{% url 'book_update' book.id %}" class="btn btn-sm"><i class="fas fa-edit"></i></a>
+            <button
+            class="btn btn-danger"
+            data-delete-url="{% url 'book_delete' book.id %}"
+            onclick="app.showDeleteModal(this, 'Tem certeza que deseja excluir o livro {{book.title}}?')"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6">Nenhum livro encontrado.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<dialog id="alert-modal">
+  <div class="modal-content">
+    <p></p>
+    <form method="post" id="delete-form">
+      {% csrf_token %}
+      <div class="modal-buttons">
+        <button
+          type="button"
+          class="action-btn cancel-btn"
+          onclick="app.closeModal()"
+        >
+          Cancelar
+        </button>
+        <button type="submit" class="action-btn confirm-btn">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+{% endblock %}
