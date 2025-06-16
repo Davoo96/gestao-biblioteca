@@ -1,6 +1,6 @@
 # Sistema de Gestão de Biblioteca Pessoal
 
-Uma aplicação web completa para gerenciar sua coleção de livros pessoal, desenvolvida com API REST Django no backend e JavaScript vanilla no frontend.
+Uma aplicação web completa para gerenciar sua coleção de livros pessoal, desenvolvida com Django
 
 ## 📚 Visão Geral
 
@@ -37,7 +37,6 @@ Este sistema permite organizar e acompanhar sua biblioteca pessoal com recursos 
 - **HTML5**: Estrutura e semântica
 - **CSS3**: Estilização e design responsivo
 - **JavaScript Vanilla**: Funcionalidade interativa e comunicação com API
-- **Chart.js** (opcional): Para visualizações do dashboard
 
 ## 📋 Pré-requisitos
 
