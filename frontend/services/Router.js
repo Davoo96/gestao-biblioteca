@@ -232,7 +232,8 @@ function getStatusText(status) {
 }
 
 async function deleteBook(id) {
-  if (confirm("Tem certeza que deseja excluir este livro?")) {
+  app.showModal("Tem certeza que deseja excluir este livro?");
+  app.confirmDelete(async () => {
     try {
       await API.deleteBook(id);
       API.showMessage("Livro excluído com sucesso!");
@@ -240,11 +241,12 @@ async function deleteBook(id) {
     } catch (error) {
       API.showMessage("Erro ao excluir livro", "error");
     }
-  }
+  });
 }
 
 async function deleteAuthor(id) {
-  if (confirm("Tem certeza que deseja excluir este autor?")) {
+  app.showModal("Tem certeza que deseja excluir este autor?");
+  app.confirmDelete(async () => {
     try {
       await API.deleteAuthor(id);
       API.showMessage("Autor excluído com sucesso!");
@@ -253,11 +255,12 @@ async function deleteAuthor(id) {
     } catch (error) {
       API.showMessage("Erro ao excluir autor", "error");
     }
-  }
+  });
 }
 
 async function deleteCategory(id) {
-  if (confirm("Tem certeza que deseja excluir esta categoria?")) {
+  app.showModal("Tem certeza que deseja excluir esta categoria?");
+  app.confirmDelete(async () => {
     try {
       await API.deleteCategory(id);
       API.showMessage("Categoria excluída com sucesso!");
@@ -266,7 +269,7 @@ async function deleteCategory(id) {
     } catch (error) {
       API.showMessage("Erro ao excluir categoria", "error");
     }
-  }
+  });
 }
 
 async function loadLoans() {

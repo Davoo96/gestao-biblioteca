@@ -19,6 +19,20 @@
       </div>
     </div>
 
+    <dialog id="alert-modal">
+      <div class="modal-content">
+        <p></p>
+        <div class="modal-buttons">
+          <button class="action-btn cancel-btn" onclick="app.closeModal()">
+            Cancelar
+          </button>
+          <button class="action-btn confirm-btn" onclick="app.executeDelete()">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </dialog>
+
     <div class="container">
       <div class="nav">
         <div class="nav-buttons">
