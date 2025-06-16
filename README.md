@@ -64,6 +64,36 @@ python -m venv venv
 source venv/bin/activate
 ```
 
+## 🐳 Usando Docker (Configuração Alternativa)
+
+Você pode executar todo o sistema do backend utilizando containers Docker:
+
+### Prerequisitos
+
+- Docker instalado
+- Docker Compose (Docker Desktop)
+
+### Construa e execute os containers
+
+```bash
+docker-compose up
+```
+
+### Acesse a aplicação
+
+- Backend API: <http://localhost:8000>
+
+- Admin interface: <http://localhost:8000/admin> (use suas credenciais de superusuário)
+
+### Acesse o frontend
+
+```bash
+cd frontend/
+python -m http.server 3000
+```
+
+- Frontend: <http://localhost:3000>
+
 ### 3. Instalar Dependências
 
 ```bash
