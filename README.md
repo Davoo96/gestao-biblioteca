@@ -76,7 +76,7 @@ Você pode executar todo o sistema do backend utilizando containers Docker:
 ### Construa e execute os containers
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 ### Acesse a aplicação
