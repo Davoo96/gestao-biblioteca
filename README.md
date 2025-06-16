@@ -81,18 +81,9 @@ docker compose up
 
 ### Acesse a aplicação
 
-- Backend API: <http://localhost:8000>
+- Projeto: <http://localhost:8000/>
 
 - Admin interface: <http://localhost:8000/admin> (use suas credenciais de superusuário)
-
-### Acesse o frontend
-
-```bash
-cd frontend/
-python -m http.server 3000
-```
-
-- Frontend: <http://localhost:3000>
 
 ### 3. Instalar Dependências
 
@@ -115,60 +106,11 @@ python manage.py createsuperuser
 
 ### 6. Executar Servidor de Desenvolvimento
 
-backend:
-
 ```bash
 python manage.py runserver
 ```
 
-frontend:
-
-```bash
-python -m http.server 3000
-```
-
-A aplicação estará disponível em `http://localhost:8000` para o backend e `http://localhost:3000/` para o front
-
-## 📁 Estrutura do Projeto
-
-```mdx
-sistema-biblioteca-pessoal/
-│
-├── backend/
-│ ├── biblioteca_project/
-│ │ ├── settings.py
-│ │ ├── urls.py
-│ │ └── wsgi.py
-│ │
-│ ├── biblioteca_app/
-│ │ ├── models.py
-│ │ ├── serializers.py
-│ │ ├── views.py
-│ │ ├── urls.py
-│ │ └── migrations/
-│ │
-│ └── manage.py
-│
-├── frontend/
-│ ├── index.html
-│ ├── css/
-│ │ ├── styles.css
-│ │ └── responsive.css
-│ │
-│ ├── js/
-│ ├── main.js
-│ ├── api.js
-│ └── dashboard.js
-│
-│
-│
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
-
-## 🔧 Endpoints da API
+A aplicação estará disponível em `http://localhost:8000`
 
 ### Livros
 

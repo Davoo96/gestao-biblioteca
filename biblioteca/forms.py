@@ -27,7 +27,7 @@ class BookForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'author': forms.TextInput(attrs={'class': 'form-control'}),
+            'author': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'pages': forms.NumberInput(attrs={'class': 'form-control'}),
             'publication_date': forms.DateInput(attrs={'class': 'form-control'}),
